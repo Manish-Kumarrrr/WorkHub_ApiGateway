@@ -14,28 +14,13 @@ import java.util.Map;
 
 @Component
 public class JwtUtil {
-    @PostConstruct
-    public void init() {
-        System.out.println("JwtUtil initialized@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    }
     @Value("${secret.key}")
     private String SECRET_KEY;
 
-    /**
-     * Returns the signing key used for JWT token signing and verification.
-     *
-     * @return SecretKey for JWT signing
-     */
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
-    /**
-     * Extracts the user Email (subject) from the JWT token.
-     *
-     * @param token The JWT token
-     * @return The extracted user Email
-     */
     public String extractEmail(String token) {
         try {
             Claims claims = extractAllClaims(token);
@@ -45,12 +30,7 @@ public class JwtUtil {
         }
     }
 
-    /**
-     * Extracts the expiration date from the JWT token.
-     *
-     * @param token The JWT token
-     * @return The expiration date of the token
-     */
+
     public Date extractExpiration(String token) {
         try {
             return extractAllClaims(token).getExpiration();
@@ -59,12 +39,7 @@ public class JwtUtil {
         }
     }
 
-    /**
-     * Extracts all claims from the JWT token.
-     *
-     * @param token The JWT token
-     * @return Claims containing all the details encoded in the token
-     */
+
     private Claims extractAllClaims(String token) {
         try {
             return Jwts
@@ -85,12 +60,7 @@ public class JwtUtil {
         }
     }
 
-    /**
-     * Generates a JWT token for a given user.
-     *
-     * @param user The user for whom the token is generated
-     * @return The generated JWT token
-     */
+
     public String generateToken(User user) {
         try {
             Map<String, Object> claims = new HashMap<>();
@@ -123,12 +93,7 @@ public class JwtUtil {
         }
     }
 
-    /**
-     * Validates the JWT token by checking its expiration.
-     *
-     * @param token The JWT token
-     * @return True if the token is valid (not expired), false otherwise
-     */
+
     public Boolean validateToken(String token) {
         try {
             return !isTokenExpired(token);
@@ -137,12 +102,7 @@ public class JwtUtil {
         }
     }
 
-    /**
-     * Checks if the JWT token has expired.
-     *
-     * @param token The JWT token
-     * @return True if the token is expired, false otherwise
-     */
+
     private Boolean isTokenExpired(String token) {
         try {
             return extractExpiration(token).before(new Date());

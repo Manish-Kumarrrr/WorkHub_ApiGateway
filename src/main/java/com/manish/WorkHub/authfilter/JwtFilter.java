@@ -34,6 +34,12 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
+        String path = request.getRequestURI();
+        if (path.startsWith("/v1/auth/") || path.startsWith("/swagger-ui/") || path.startsWith("/v1/**")) {
+            logger.warn("jwt filter hit");
+            chain.doFilter(request, response); // Skip JWT validation for whitelisted endpoints
+            return;
+        }
         // Extract JWT from cookies
         Cookie[] cookies = request.getCookies();
         String authorizationHeader = ""; // Alternate approach: request.getHeader("Authorization");
@@ -45,21 +51,21 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
             }
         }
-
+        System.out.println("Security Filter Chain");
         String jwt = null; // Holds the JWT token
-        String id = null;  // Holds the user ID extracted from the token
+        String email = null;  // Holds the user ID extracted from the token
 
         try {
             // Check if the Authorization header or cookie contains a Bearer token
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer+")) {
                 jwt = authorizationHeader.substring(7); // Remove "Bearer+ " prefix to extract the JWT
-                id = jwtUtil.extractEmail(jwt); // Extract the user ID from the token
+                email = jwtUtil.extractEmail(jwt); // Extract the user email from the token
             }
 
-            // If a valid user ID is found and the user is not yet authenticated
-            if (id != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                // Load user details using the extracted user ID
-                UserDetails userDetails = userDetailsService.loadUserByUsername(id);
+            // If a valid user Email is found and the user is not yet authenticated
+            if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                // Load user details using the extracted user Email
+                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
                 // Validate the JWT token
                 if (jwtUtil.validateToken(jwt)) {

@@ -25,24 +25,16 @@ public class SecurityConfiguration {
             "/v1/auth/**",
             "/swagger-ui/index.html",
             "/v3/**",
-            "/swagger-ui/**","/**"
+            "/swagger-ui/**"
     };
 
-    /**
-     * Security filter chain configuration to define authorization and authentication mechanisms.
-     * @param http HttpSecurity configuration for Spring Security
-     * @return SecurityFilterChain that defines the security setup
-     * @throws Exception If any error occurs during configuration
-     */
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-
 
         return http.authorizeHttpRequests(request -> request
                         // Allow public access to authentication-related endpoints
                         .requestMatchers(whiteListUrl).permitAll()
-                        // Resource endpoints for 'USER', 'MODERATOR', and 'ADMIN' roles
                         .requestMatchers("/v1/**").hasAnyRole("ADMIN","USER")
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable()) // Disables CSRF as the app is stateless and relies on JWT for security

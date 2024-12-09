@@ -1,17 +1,8 @@
-
-
-server:
-  port: 8085
 spring:
   application:
     name: WorkHub Api Gateway
-  cloud:
-    gateway:
-      routes:
-        - id: User Service
-          uri: http://localhost:8081
-          predicates:
-            - Path=/v1/api/user/**
+server:
+  port: 8085
 
 UserService: http://localhost:8081
 cookie:
@@ -20,7 +11,7 @@ env: dev
 
 logging:
   level:
-    root: DEBUG
+    com.manish.WorkHub.client.UserClient: DEBUG
 
 secret:
   key: CHEFsEVfypW#7g9^k*Z8$VTaK+HaV^uv

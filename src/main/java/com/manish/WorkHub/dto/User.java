@@ -2,9 +2,11 @@ package com.manish.WorkHub.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data // Lombok generates getters, setters, and toString methods
-@Builder
+@NoArgsConstructor
 public class User {
     private String email;
     private String name;

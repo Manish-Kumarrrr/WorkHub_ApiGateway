@@ -18,5 +18,4 @@ public class RegisterRequest {
     private String profileUrl;
     private String phoneNo;
     private String role;
-    private String token;
 }

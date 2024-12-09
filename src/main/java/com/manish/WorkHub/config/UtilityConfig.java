@@ -24,14 +24,14 @@ public class UtilityConfig {
         return new BCryptPasswordEncoder(); // Use BCrypt to securely encode passwords
     }
 
-//    @Bean
-//    public OpenAPI customOpenAPI() {
-//
-//        return new OpenAPI()
-//                .info(new Info().title("WorkHub API Gateway"))
-//                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
-//                .components(new Components().addSecuritySchemes("bearerAuth", new SecurityScheme()
-//                        .name("bearerAuth").type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")));
-//
-//    }
+    @Bean
+    public OpenAPI customOpenAPI() {
+
+        return new OpenAPI()
+                .info(new Info().title("WorkHub API Gateway"))
+                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
+                .components(new Components().addSecuritySchemes("bearerAuth", new SecurityScheme()
+                        .name("bearerAuth").type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")));
+
+    }
 }

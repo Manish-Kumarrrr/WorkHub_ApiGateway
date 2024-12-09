@@ -1,15 +1,15 @@
 package com.manish.WorkHub.dto;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * DTO class for sending the login response details.
  * This class contains the user identifier and the JWT token returned after successful login.
  */
 @Data
-@Builder
-public class LoginResponse {
+@NoArgsConstructor
+public class UserResponse {
 
     private String email;
     private String name;
@@ -17,5 +17,4 @@ public class LoginResponse {
     private String profileUrl;
     private String phoneNo;
     private String role;
-    private String token;
 }
