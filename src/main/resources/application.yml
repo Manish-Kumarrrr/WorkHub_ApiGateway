@@ -1,10 +1,10 @@
-spring.application.name: WorkHub Api Gateway
+
 
 server:
   port: 8085
 spring:
   application:
-    name: API-GATEWAY-SERVICE
+    name: WorkHub Api Gateway
   cloud:
     gateway:
       routes:
@@ -12,3 +12,15 @@ spring:
           uri: http://localhost:8081
           predicates:
             - Path=/v1/api/user/**
+
+UserService: http://localhost:8081
+cookie:
+  expireTime: 3600
+env: dev
+
+logging:
+  level:
+    root: DEBUG
+
+secret:
+  key: CHEFsEVfypW#7g9^k*Z8$VTaK+HaV^uv
