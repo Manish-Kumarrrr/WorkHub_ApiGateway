@@ -65,6 +65,11 @@ public class AuthServiceImpl implements AuthService {
         return modelMapper.map(user, UserResponse.class);
     }
 
+    @Override
+    public ResponseEntity<?> generateCloudinarySignature() {
+        return userClient.generateCloudinarySignature();
+    }
+
     private Cookie createAuthorizationCookie(String token) {
         Cookie cookie = new Cookie("Authorization", URLEncoder.encode("Bearer " + token, StandardCharsets.UTF_8));
         cookie.setMaxAge(expireTime);

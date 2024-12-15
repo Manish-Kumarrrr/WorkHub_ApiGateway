@@ -17,4 +17,5 @@ public interface AuthService {
 
     UserResponse login(LoginRequest loginRequest, HttpServletResponse response);
 
+    ResponseEntity<?> generateCloudinarySignature();
 }

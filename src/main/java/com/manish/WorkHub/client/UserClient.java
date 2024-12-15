@@ -11,16 +11,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name = "WorkHub-User-Service", url = "localhost:8081", path = "/v1/api/user")
+@FeignClient(name = "WorkHub-User-Service", url = "localhost:8081", path = "/v1/api")
 public interface UserClient {
 
-    @PostMapping("/info")
+    @PostMapping("/user/info")
     public ResponseEntity<ApiResponse> getUserInfo(@RequestBody LoginRequest loginRequest);
 
-    @PostMapping("/register")
+    @PostMapping("/user/register")
     public ResponseEntity<ApiResponse> registerUser(@RequestBody RegisterRequest registerRequest);
 
-    @GetMapping("/all")
+    @GetMapping("/user/all")
     public ResponseEntity<List<ApiResponse>> getAllUser();
+
+    @GetMapping("/cloudinary/generate")
+    public ResponseEntity<?> generateCloudinarySignature();
 
 }

@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/v1/auth") // Base URL for authentication-related endpoints
-@RequiredArgsConstructor // Lombok's annotation to automatically generate a constructor for the final fields
-@Tag(name = "Authentication API", description = "APIs for user authentication and authorization")
+@RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService; // Service layer for authentication logic
@@ -35,10 +34,15 @@ public class AuthController {
         return authService.register(registerRequest,response);
     }
 
-@GetMapping("/")
-    public String s(){
-        return "dfdfd";
-}
+    @GetMapping("/")
+        public String s(){
+            return "dfdfd";
+    }
+
+    @GetMapping("/cloudinarySignature")
+    public ResponseEntity<?> generateCloudinarySignature(){
+        return authService.generateCloudinarySignature();
+    }
 
 
 }
