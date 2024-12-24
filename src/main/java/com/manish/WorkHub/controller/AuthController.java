@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "${WorkHub_UI}")
 @RestController
 @RequestMapping("/v1/auth") // Base URL for authentication-related endpoints
 @RequiredArgsConstructor
@@ -36,7 +36,7 @@ public class AuthController {
 
     @GetMapping("/")
         public String s(){
-            return "dfdfd";
+            return "health check";
     }
 
     @GetMapping("/cloudinarySignature")

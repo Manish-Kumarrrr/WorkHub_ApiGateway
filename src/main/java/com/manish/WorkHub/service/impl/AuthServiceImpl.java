@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +40,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public ResponseEntity<ApiResponse> register(RegisterRequest registerRequest, HttpServletResponse response) {
         registerRequest.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        registerRequest.setJoindate(new Date());
         try {
             ResponseEntity<ApiResponse> registerUser = userClient.registerUser(registerRequest);
             String token = jwtUtil.generateToken(modelMapper.map(registerUser.getBody(), User.class));

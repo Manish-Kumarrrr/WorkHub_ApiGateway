@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name = "WorkHub-User-Service", url = "localhost:8081", path = "/v1/api")
+@FeignClient(name = "WorkHub-User-Service", url = "${UserService}", path = "/v1/api")
 public interface UserClient {
 
     @PostMapping("/user/info")

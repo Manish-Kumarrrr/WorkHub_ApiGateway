@@ -35,7 +35,7 @@ public class JwtFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String path = request.getRequestURI();
-        if (path.startsWith("/v1/auth/") || path.startsWith("/swagger-ui/") || path.startsWith("/v1/**")) {
+        if (path.startsWith("/v1/auth/") || path.startsWith("/swagger-ui/") || path.startsWith("/v1")) {
             logger.warn("jwt filter hit");
             chain.doFilter(request, response); // Skip JWT validation for whitelisted endpoints
             return;

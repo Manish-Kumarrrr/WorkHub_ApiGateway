@@ -21,7 +21,7 @@ public class SecurityConfiguration {
 
     private final JwtFilter jwtFilter; // JWT filter used to authenticate requests
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint; // Custom entry point for unauthorized requests
-    private static final String[] whiteListUrl = {  // Array of whiteList Url
+    private final String[] whiteListUrl = {  // Array of whiteList Url
             "/v1/auth/**",
             "/swagger-ui/index.html",
             "/v3/**",
@@ -34,8 +34,8 @@ public class SecurityConfiguration {
 
         return http.authorizeHttpRequests(request -> request
                         // Allow public access to authentication-related endpoints
-                        .requestMatchers(whiteListUrl).permitAll()
-                        .requestMatchers("/v1/**").hasAnyRole("ADMIN","USER")
+                        .requestMatchers("/v1/**").permitAll()
+//                        .requestMatchers("/v1/**").hasAnyRole("ADMIN","USER")
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable()) // Disables CSRF as the app is stateless and relies on JWT for security
                 .exceptionHandling(exception -> exception

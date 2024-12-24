@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Date;
+import java.util.List;
+
 @Data // Lombok generates getters, setters, and toString methods
 @NoArgsConstructor
 public class User {
@@ -14,5 +17,7 @@ public class User {
     private String profileUrl;
     private String phoneNo;
     private String role;
+    private Date joinDate;
+    private List<String> interests;
 
 }

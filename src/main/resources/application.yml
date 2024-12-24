@@ -8,6 +8,8 @@ UserService: http://localhost:8081
 cookie:
   expireTime: 3600
 env: dev
+TaskService: http://localhost:8082
+WorkHub_UI: http://localhost:3000
 
 logging:
   level:
